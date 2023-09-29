@@ -1,5 +1,6 @@
 FROM python:3.10
 COPY . /code
+
 WORKDIR /code
 RUN pip install pip  --upgrade
 RUN apt-get update && apt-get install -y python3
