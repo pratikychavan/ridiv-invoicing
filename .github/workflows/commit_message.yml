@@ -21,19 +21,3 @@ jobs:
               exit 1
             fi
           done
-This workflow triggers on every push to the main branch and checks the commit messages against the specified regular expression pattern. Adjust the branch name as needed.
-
-Commit and Push Workflow File:
-Commit the workflow YAML file to your repository and push it to GitHub.
-
-GitHub Action Configuration:
-After pushing the workflow file, GitHub Actions will automatically detect and run the workflow. You can view the workflow's status and any errors in the "Actions" tab of your repository.
-
-Now, every time a developer pushes changes to the main branch, the GitHub Action will check if the commit messages follow the specified format (e.g., "NNG-<ticket_number>-<short_description>"). If a commit message doesn't match the pattern, the workflow will fail, preventing the push from being accepted until the commit messages are corrected.
-
-Developers will need to ensure that their commit messages adhere to the specified format to successfully push changes to the main branch.
-
-
-
-
-
