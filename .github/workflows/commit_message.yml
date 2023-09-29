@@ -1,0 +1,39 @@
+name: Commit Message Check
+on:
+  push:
+    branches:
+      - main  # Adjust to your repository's main branch name
+
+jobs:
+  commit-message-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Commit Messages
+        run: |
+          # Define the regex pattern for commit message format
+          pattern="^NNG-[0-9]+-.+"
+
+          # Loop through the commits in the push
+          for commit in $(git log --format=%s ${{ github.event.before }}..${{ github.sha }}); do
+            if ! [[ "$commit" =~ $pattern ]]; then
+              echo "error: Commit message format is invalid: $commit"
+              exit 1
+            fi
+          done
+This workflow triggers on every push to the main branch and checks the commit messages against the specified regular expression pattern. Adjust the branch name as needed.
+
+Commit and Push Workflow File:
+Commit the workflow YAML file to your repository and push it to GitHub.
+
+GitHub Action Configuration:
+After pushing the workflow file, GitHub Actions will automatically detect and run the workflow. You can view the workflow's status and any errors in the "Actions" tab of your repository.
+
+Now, every time a developer pushes changes to the main branch, the GitHub Action will check if the commit messages follow the specified format (e.g., "NNG-<ticket_number>-<short_description>"). If a commit message doesn't match the pattern, the workflow will fail, preventing the push from being accepted until the commit messages are corrected.
+
+Developers will need to ensure that their commit messages adhere to the specified format to successfully push changes to the main branch.
+
+
+
+
+
